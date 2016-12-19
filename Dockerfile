@@ -4,6 +4,6 @@ RUN wget https://storage.googleapis.com/kubernetes-release/release/v1.3.6/bin/li
 RUN chmod +x kubectl
 RUN mv kubectl /usr/local/bin/
 
-ADD verify.sh /etc/openvpn/
-ADD save_secrets.sh /etc/openvpn/
-ADD enable_password_auth.sh /etc/openvpn/
+ADD verify /bin/
+ADD save_secrets /bin/
+ADD enable_password_auth /bin/
