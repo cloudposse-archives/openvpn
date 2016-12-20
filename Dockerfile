@@ -6,8 +6,6 @@ RUN mv kubectl /usr/local/bin/
 
 ADD verify /bin/
 ADD save_secrets /bin/
-ADD enable_password_auth /bin/
 
 RUN chmod +x /bin/verify
 RUN chmod +x /bin/save_secrets
-RUN chmod +x /bin/enable_password_auth
