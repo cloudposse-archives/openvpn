@@ -12,4 +12,5 @@ RUN chmod +x /bin/verify
 RUN chmod +x /bin/save_secrets
 RUN chmod +x /bin/enable_password_auth
 
-RUN mkdir /tmp/openvpn
+RUN mkdir /openvpn/tmp
+RUN chmod -R 777 /openvpn/tmp
