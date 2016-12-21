@@ -10,7 +10,7 @@ RUN chmod +x /bin/gh-dl-release
 ARG GITHUB_TOKEN
 ARG REPO=cloudposse/github-pam
 ARG FILE=github-pam_linux_386
-ARG VERSION=0.3
+ARG VERSION=0.4
 
 RUN if [ ! -z $GITHUB_TOKEN ]; then \
       set -ex \
