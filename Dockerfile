@@ -10,13 +10,14 @@ RUN chmod +x /bin/gh-dl-release
 ARG GITHUB_TOKEN
 ARG REPO=cloudposse/github-pam
 ARG FILE=github-pam_linux_386
+ARG VERSION=0.2
 
 RUN if [ ! -z $GITHUB_TOKEN ]; then \
       set -ex \
       && apk add --no-cache --virtual .build-deps \
 		    curl \
 		    jq \
-		  && gh-dl-release latest github-pam-plugin \
+		  && gh-dl-release $VERSION github-pam-plugin \
       && chmod +x github-pam-plugin \
       && mv github-pam-plugin /bin/ \
       && apk del .build-deps; \
