@@ -12,14 +12,14 @@ ARG REPO=cloudposse/github-pam
 ARG FILE=github-pam_linux_386
 
 RUN if [ ! -z $GITHUB_TOKEN ]; then \
-    set -ex \
-    && apk add --no-cache --virtual .build-deps \
-		curl \
-		jq \
-		&& gh-dl-release latest github-pam-plugin \
-    && chmod +x github-pam-plugin \
-    && mv github-pam-plugin /bin/ \
-    && apk del .build-deps; \
+      set -ex \
+      && apk add --no-cache --virtual .build-deps \
+		    curl \
+		    jq \
+		  && gh-dl-release latest github-pam-plugin \
+      && chmod +x github-pam-plugin \
+      && mv github-pam-plugin /bin/ \
+      && apk del .build-deps; \
     fi
 
 ADD save_secrets /bin/
