@@ -12,7 +12,7 @@ ARG REPO=cloudposse/github-pam
 ARG FILE=github-pam_linux_386
 ARG VERSION=0.4
 
-RUN if [ ! -z $GITHUB_TOKEN ]; then \
+RUN if [ -n $GITHUB_TOKEN ]; then \
       set -ex \
       && apk add --no-cache --virtual .build-deps \
 		    curl \
