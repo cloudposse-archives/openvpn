@@ -29,5 +29,8 @@ RUN if [ ! -z $GITHUB_TOKEN ]; then \
       exit 1; \
     fi
 
+ADD ./bin /usr/local/bin
+RUN chmod a+x /usr/local/bin/*
+
 ADD save_secrets /bin/
 RUN chmod +x /bin/save_secrets
