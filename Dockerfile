@@ -12,7 +12,7 @@ RUN chmod +x /bin/gh-dl-release
 ARG GITHUB_TOKEN
 ARG REPO=cloudposse/github-pam
 ARG FILE=github-pam_linux_386
-ARG VERSION=0.6
+ARG VERSION=0.8
 
 RUN if [ ! -z $GITHUB_TOKEN ]; then \
       set -ex \
@@ -28,9 +28,6 @@ RUN if [ ! -z $GITHUB_TOKEN ]; then \
       echo '`GITHUB_TOKEN` required for fetching github-pam-plugin'; \
       exit 1; \
     fi
-
-ADD ./bin /usr/local/bin
-RUN chmod a+x /usr/local/bin/*
 
 ADD save_secrets /bin/
 RUN chmod +x /bin/save_secrets
