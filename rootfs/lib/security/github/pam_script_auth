@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+github-pam-plugin $1
+PAM_SCRIPT_STATUS=$?
+export PAM_SCRIPT_STATUS
+exit $PAM_SCRIPT_STATUS

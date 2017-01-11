@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+PAM_SCRIPT_STATUS=0
+export PAM_SCRIPT_STATUS
+exit $PAM_SCRIPT_STATUS

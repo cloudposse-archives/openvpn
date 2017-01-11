@@ -6,19 +6,23 @@ RUN wget https://storage.googleapis.com/kubernetes-release/release/$K8S_VERSION/
 RUN chmod +x kubectl
 RUN mv kubectl /usr/local/bin/
 
-ADD gh-dl-release /bin/
-RUN chmod +x /bin/gh-dl-release
-
 ARG GITHUB_TOKEN
 ARG REPO=cloudposse/github-pam
 ARG FILE=github-pam_linux_386
-ARG VERSION=0.8
+ARG VERSION=0.10
+ARG PAM_SCRIPT_VERSION=1.1.8-1
+
+ADD rootfs /
 
 RUN if [ ! -z $GITHUB_TOKEN ]; then \
       set -ex \
+      && echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+      && apk update \
       && apk add --no-cache --virtual .build-deps \
 		    curl \
 		    jq \
+		    linux-pam \
+		    pamtester \
 		  && gh-dl-release $VERSION github-pam-plugin \
       && chmod +x github-pam-plugin \
       && mv github-pam-plugin /bin/ \
@@ -29,5 +33,31 @@ RUN if [ ! -z $GITHUB_TOKEN ]; then \
       exit 1; \
     fi
 
-ADD save_secrets /bin/
-RUN chmod +x /bin/save_secrets
+RUN set -ex \
+      && apk update \
+      && apk add linux-pam \
+      && apk add --no-cache --virtual .build-deps \
+		    curl \
+		    libtool \
+		    autoconf \
+		    automake \
+		    build-base \
+		    linux-pam-dev \
+		    pamtester \
+		  && cd /tmp \
+      && curl --max-redirs 10 https://codeload.github.com/jeroennijhof/pam_script/zip/$PAM_SCRIPT_VERSION > pam_script.zip \
+      && unzip pam_script.zip \
+      && cd pam_script-$PAM_SCRIPT_VERSION \
+      && libtoolize --force \
+      && aclocal \
+      && autoheader \
+      && automake --force-missing --add-missing \
+      && autoconf \
+      && ./configure \
+      && make \
+      && make install \
+      && mv  /usr/local/lib/pam_script.so /lib/security/pam_script.so \
+      && cd ../ \
+      && rm -rf pam_script-$PAM_SCRIPT_VERSION \
+      && rm -rf pam_script.zip \
+      && apk del .build-deps;
