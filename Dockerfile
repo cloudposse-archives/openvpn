@@ -1,6 +1,6 @@
 FROM kylemanna/openvpn:latest
 
-ARG K8S_VERSION=v1.3.6
+ARG K8S_VERSION=v1.5.1
 
 RUN wget https://storage.googleapis.com/kubernetes-release/release/$K8S_VERSION/bin/linux/amd64/kubectl
 RUN chmod +x kubectl
