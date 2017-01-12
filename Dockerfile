@@ -23,10 +23,10 @@ RUN if [ ! -z $GITHUB_TOKEN ]; then \
       && echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
       && apk update \
       && apk add --no-cache --virtual .build-deps \
-		      curl \
-		      jq \
-		      linux-pam \
-		      pamtester \
+          curl \
+          jq \
+          linux-pam \
+          pamtester \
 		  && gh-dl-release $VERSION github-pam-plugin \
       && chmod +x github-pam-plugin \
       && mv github-pam-plugin /bin/ \
@@ -41,13 +41,13 @@ RUN set -ex \
       && apk update \
       && apk add linux-pam \
       && apk add --no-cache --virtual .build-deps \
-		      curl \
-		      libtool \
-		      autoconf \
-		      automake \
-		      build-base \
-		      linux-pam-dev \
-		      pamtester \
+          curl \
+          libtool \
+          autoconf \
+          automake \
+          build-base \
+          linux-pam-dev \
+          pamtester \
 		  && cd /tmp \
       && curl --max-redirs 10 https://codeload.github.com/jeroennijhof/pam_script/zip/$PAM_SCRIPT_VERSION > pam_script.zip \
       && unzip pam_script.zip \
