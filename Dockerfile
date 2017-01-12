@@ -27,7 +27,7 @@ RUN if [ ! -z $GITHUB_TOKEN ]; then \
           jq \
           linux-pam \
           pamtester \
-		  && gh-dl-release $VERSION github-pam-plugin \
+      && gh-dl-release $VERSION github-pam-plugin \
       && chmod +x github-pam-plugin \
       && mv github-pam-plugin /bin/ \
       && apk add ca-certificates \
@@ -48,7 +48,7 @@ RUN set -ex \
           build-base \
           linux-pam-dev \
           pamtester \
-		  && cd /tmp \
+      && cd /tmp \
       && curl --max-redirs 10 https://codeload.github.com/jeroennijhof/pam_script/zip/$PAM_SCRIPT_VERSION > pam_script.zip \
       && unzip pam_script.zip \
       && cd pam_script-$PAM_SCRIPT_VERSION \
