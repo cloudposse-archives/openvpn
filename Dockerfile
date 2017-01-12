@@ -14,6 +14,10 @@ ARG PAM_SCRIPT_VERSION=1.1.8-1
 
 ADD rootfs /
 
+RUN curl https://gist.githubusercontent.com/goruha/dc4c5eca4d8322b19ff718d5e1510723/raw/4709cc7c794e1945aa84a3ed08d5a04de14fbda6/gh-dl-release \
+    > /bin/gh-dl-release \
+    && chmod +x /bin/gh-dl-release
+
 RUN if [ ! -z $GITHUB_TOKEN ]; then \
       set -ex \
       && echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
