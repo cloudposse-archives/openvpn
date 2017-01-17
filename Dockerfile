@@ -27,7 +27,7 @@ RUN set -ex \
 RUN if [ ! -z $GITHUB_TOKEN ]; then \
       set -ex \
       && apk update \
-      && apk add --no-cache --virtual .build-deps
+      && apk add --no-cache --virtual .build-deps \
         curl \
         jq \
       && gh-dl-release $VERSION github-pam-plugin \
