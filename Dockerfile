@@ -35,7 +35,7 @@ RUN if [ ! -z $GITHUB_TOKEN ]; then \
       && mv github-pam-plugin /bin/ \
       && make clean \
       && rm -f /Makefile \
-      && apk del .build-deps;
+      && apk del .build-deps; \
     else \
       echo '`GITHUB_TOKEN` required for fetching github-pam-plugin'; \
       exit 1; \
