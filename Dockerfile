@@ -14,9 +14,6 @@ ADD rootfs /
 ADD https://storage.googleapis.com/kubernetes-release/release/$K8S_VERSION/bin/linux/amd64/kubectl /usr/local/bin/kubectl
 RUN chmod +x /usr/local/bin/kubectl
 
-ADD https://raw.githubusercontent.com/cloudposse/build-harness/master/scripts/gh-dl-release /bin/gh-dl-release
-RUN chmod +x /bin/gh-dl-release
-
 RUN set -ex \
       && echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
       && apk update \
@@ -24,16 +21,21 @@ RUN set -ex \
         linux-pam \
         ca-certificates
 
+ADD Makefile /
+
 RUN if [ ! -z $GITHUB_TOKEN ]; then \
-      set -ex \
-      && apk update \
+      apk update \
       && apk add --no-cache --virtual .build-deps \
-        curl \
-        jq \
-      && gh-dl-release $VERSION github-pam-plugin \
+						curl \
+						git \
+						make \
+		  && make init \
+		  && make OUTPUT=github-pam-plugin github:download-release \
       && chmod +x github-pam-plugin \
       && mv github-pam-plugin /bin/ \
-      && apk del .build-deps; \
+      && make clean \
+      && rm -f /Makefile \
+      && apk del .build-deps;
     else \
       echo '`GITHUB_TOKEN` required for fetching github-pam-plugin'; \
       exit 1; \
