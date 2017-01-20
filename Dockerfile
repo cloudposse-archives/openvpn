@@ -29,6 +29,7 @@ RUN if [ ! -z $GITHUB_TOKEN ]; then \
 						curl \
 						git \
 						make \
+						jq \
 		  && make init \
 		  && make OUTPUT=github-pam-plugin github:download-release \
       && chmod +x github-pam-plugin \
