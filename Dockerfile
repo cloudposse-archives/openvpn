@@ -24,7 +24,8 @@ RUN set -ex \
 ADD Makefile /
 
 RUN if [ ! -z $GITHUB_TOKEN ]; then \
-      apk update \
+      set -ex \
+      && apk update \
       && apk add --no-cache --virtual .build-deps \
 						curl \
 						git \
