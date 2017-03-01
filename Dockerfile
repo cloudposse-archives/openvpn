@@ -6,9 +6,6 @@ ADD https://storage.googleapis.com/kubernetes-release/release/$K8S_VERSION/bin/l
 RUN chmod +x /usr/local/bin/kubectl
 
 ARG GITHUB_TOKEN
-ARG REPO=cloudposse/github-pam
-ARG FILE=github-pam_linux_386
-ARG VERSION=0.10
 ARG PAM_SCRIPT_VERSION=1.1.8-1
 
 ADD rootfs /
@@ -25,13 +22,34 @@ RUN if [ ! -z $GITHUB_TOKEN ]; then \
           jq \
           linux-pam \
           pamtester \
-      && gh-dl-release $VERSION github-pam-plugin \
+      && REPO=cloudposse/github-pam \
+          VERSION=0.10 \
+          FILE=github-pam_linux_386 \
+          gh-dl-release $VERSION github-pam-plugin \
       && chmod +x github-pam-plugin \
       && mv github-pam-plugin /bin/ \
       && apk add ca-certificates \
       && apk del .build-deps; \
     else \
       echo '`GITHUB_TOKEN` required for fetching github-pam-plugin'; \
+      exit 1; \
+    fi
+
+RUN if [ ! -z $GITHUB_TOKEN ]; then \
+      set -ex \
+      && apk update \
+      && apk add --no-cache --virtual .build-deps \
+          curl \
+          jq \
+      && REPO=cloudposse/openvpn-api \
+          VERSION=0.1 \
+          FILE=openvpn-api_linux_386 \
+          gh-dl-release $VERSION openvpn-api \
+      && chmod +x openvpn-api \
+      && mv openvpn-api /bin/ \
+      && apk del .build-deps; \
+    else \
+      echo '`GITHUB_TOKEN` required for fetching openvpn-api'; \
       exit 1; \
     fi
 
