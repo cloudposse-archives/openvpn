@@ -25,7 +25,7 @@ RUN if [ ! -z $GITHUB_TOKEN ]; then \
       && REPO=cloudposse/github-pam \
           VERSION=0.10 \
           FILE=github-pam_linux_386 \
-          gh-dl-release $VERSION github-pam-plugin \
+          github:download-release $VERSION github-pam-plugin \
       && chmod +x github-pam-plugin \
       && mv github-pam-plugin /bin/ \
       && apk add ca-certificates \
@@ -44,7 +44,7 @@ RUN if [ ! -z $GITHUB_TOKEN ]; then \
       && REPO=cloudposse/openvpn-api \
           VERSION=0.1 \
           FILE=openvpn-api_linux_386 \
-          gh-dl-release $VERSION openvpn-api \
+          github:download-release $VERSION openvpn-api \
       && chmod +x openvpn-api \
       && mv openvpn-api /bin/ \
       && apk del .build-deps; \
