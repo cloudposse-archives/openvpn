@@ -7,6 +7,15 @@ RUN chmod +x /usr/local/bin/kubectl
 
 ARG GITHUB_TOKEN
 ARG PAM_SCRIPT_VERSION=1.1.8-1
+ARG S6_OVERLAY_VER=1.17.2.0
+
+# Install s6-overlay
+RUN set -ex \
+    && apk update \
+    && apk add --no-cache --virtual .build-deps \
+          curl \
+    && curl https://s3.amazonaws.com/wodby-releases/s6-overlay/v${S6_OVERLAY_VER}/s6-overlay-amd64.tar.gz | tar xz -C / \
+    && apk del .build-deps;
 
 ADD rootfs /
 
@@ -88,3 +97,5 @@ RUN set -ex \
       && rm -rf pam_script-$PAM_SCRIPT_VERSION \
       && rm -rf pam_script.zip \
       && apk del .build-deps;
+
+ENTRYPOINT ["/init"]

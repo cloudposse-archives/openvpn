@@ -1,0 +1,2 @@
+#!/usr/bin/with-contenv sh
+envsubst < "/cloudposse/templates/pam/openvpn" > "/etc/pam.d/openvpn"
