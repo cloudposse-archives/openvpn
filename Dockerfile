@@ -98,5 +98,4 @@ RUN set -ex \
       && rm -rf pam_script.zip \
       && apk del .build-deps;
 
-
 ENTRYPOINT ["/init"]
