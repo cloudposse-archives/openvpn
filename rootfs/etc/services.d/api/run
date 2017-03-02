@@ -1,2 +1,2 @@
-#!/usr/bin/with-contenv shs
+#!/usr/bin/with-contenv sh
 openvpn-api
