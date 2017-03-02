@@ -10,8 +10,7 @@ ARG PAM_SCRIPT_VERSION=1.1.8-1
 
 ADD rootfs /
 
-ADD https://gist.githubusercontent.com/goruha/dc4c5eca4d8322b19ff718d5e1510723/raw/4709cc7c794e1945aa84a3ed08d5a04de14fbda6/gh-dl-release /bin/gh-dl-release
-RUN chmod +x /bin/gh-dl-release
+ADD https://raw.githubusercontent.com/cloudposse/build-harness/master/templates/Makefile.build-harness Makefile
 
 RUN if [ ! -z $GITHUB_TOKEN ]; then \
       set -ex \
@@ -22,10 +21,14 @@ RUN if [ ! -z $GITHUB_TOKEN ]; then \
           jq \
           linux-pam \
           pamtester \
+          make \
+          git \
+      && make  \
       && REPO=cloudposse/github-pam \
           VERSION=0.10 \
           FILE=github-pam_linux_386 \
-          github:download-release $VERSION github-pam-plugin \
+          OUTPUT=github-pam-plugin \
+          make github:download-release  \
       && chmod +x github-pam-plugin \
       && mv github-pam-plugin /bin/ \
       && apk add ca-certificates \
@@ -41,10 +44,14 @@ RUN if [ ! -z $GITHUB_TOKEN ]; then \
       && apk add --no-cache --virtual .build-deps \
           curl \
           jq \
+          git \
+          make \
+      && make \
       && REPO=cloudposse/openvpn-api \
           VERSION=0.1 \
           FILE=openvpn-api_linux_386 \
-          github:download-release $VERSION openvpn-api \
+          OUTPUT=openvpn-api \
+          make github:download-release \
       && chmod +x openvpn-api \
       && mv openvpn-api /bin/ \
       && apk del .build-deps; \
