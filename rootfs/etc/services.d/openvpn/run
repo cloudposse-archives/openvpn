@@ -1,2 +1,2 @@
 #!/usr/bin/execlineb -P
-ovpn_run
+/usr/local/bin/ovpn_run
