@@ -1,0 +1,12 @@
+#!/usr/bin/with-contenv bash
+
+if [ "${MFA_PROVIDER}" == "github" ]; then
+  echo "- Enabling Github"
+
+  if [ -z "${GITHUB_PAM_TEAM}" ]; then
+    echo "GITHUB_PAM_TEAM not defined"
+    exit 1;
+  fi
+
+  envsubst < "/cloudposse/templates/pam/github" > "/etc/pam.d/openvpn"
+fi
