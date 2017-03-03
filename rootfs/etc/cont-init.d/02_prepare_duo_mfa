@@ -17,7 +17,7 @@ if [ "${MFA_PROVIDER}" == "duo" ]; then
     exit 1;
   fi
 
-  envsubst < "/cloudposse/templates/pam/duo" > "/etc/pam.d/openvpn"
-  envsubst < "/cloudposse/templates/pam/pam_duo.conf.env" > "/etc/pam_duo.conf"
+  /usr/bin/envsubst < "/cloudposse/templates/pam/duo" > "/etc/pam.d/openvpn"
+  /usr/bin/envsubst < "/cloudposse/templates/pam/pam_duo.conf.env" > "/etc/pam_duo.conf"
   chmod 600 /etc/pam_duo.conf
 fi

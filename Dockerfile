@@ -20,7 +20,7 @@ ENV GITHUB_PAM_TEAM=
 ADD https://storage.googleapis.com/kubernetes-release/release/$K8S_VERSION/bin/linux/amd64/kubectl /usr/local/bin/kubectl
 RUN chmod +x /usr/local/bin/kubectl
 
-RUN apk --update add linux-pam ca-certificates && \
+RUN apk --update add linux-pam ca-certificates libintl gettext && \
     update-ca-certificates && \
     ln -s /lib /lib64
 
