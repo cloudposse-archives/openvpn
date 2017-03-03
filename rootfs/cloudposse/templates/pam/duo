@@ -1,3 +1,2 @@
 auth        sufficient  pam_duo.so    conf=/etc/pam_duo.conf
-auth        optional    pam_echo.so   file=/etc/auth-failure.txt
 account     sufficient  pam_permit.so

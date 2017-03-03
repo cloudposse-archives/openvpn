@@ -9,4 +9,5 @@ if [ "${MFA_PROVIDER}" == "github" ]; then
   fi
 
   /usr/bin/envsubst < "/cloudposse/templates/pam/github" > "/etc/pam.d/openvpn"
+  chmod 644 /etc/pam.d/openvpn
 fi

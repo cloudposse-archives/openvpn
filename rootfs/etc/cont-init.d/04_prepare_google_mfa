@@ -4,4 +4,5 @@ if [ "${MFA_PROVIDER}" == "google-authenticator" ]; then
   echo "- Enabling Google Authenticator"
 
   cp /cloudposse/templates/pam/google-authenticator > /etc/pam.d/openvpn
+  chmod 644 /etc/pam.d/openvpn
 fi
