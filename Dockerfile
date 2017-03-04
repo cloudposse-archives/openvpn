@@ -42,11 +42,12 @@ RUN apk add --virtual .build-deps build-base automake autoconf libtool git linux
       unzip duo_unix-latest.zip && \
       rm -f  duo_unix-latest.zip && \
       cd duo_unix-* && \
+      ./bootstrap && \
       ./configure --with-pam --prefix=/usr && \
       make && \
       make install && \
-      cd .. && \
-      rm -rf duo_unix-* && \
+      cd ../.. && \
+      rm -rf duo_unix-* \
     ) && \
     rm -rf /usr/src && \
     apk del .build-deps && \
