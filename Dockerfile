@@ -38,7 +38,7 @@ ENTRYPOINT ["/init"]
 RUN apk add --virtual .build-deps build-base automake autoconf libtool git linux-pam-dev openssl-dev wget unzip && \
     mkdir -p /usr/src && \
     cd /usr/src && \
-    ( wget -0 duo_unix-latest.zip https://github.com/goruha/duo_unix/archive/master.zip && \
+    ( wget -O duo_unix-latest.zip https://github.com/goruha/duo_unix/archive/master.zip && \
       unzip duo_unix-latest.zip && \
       cd duo_unix-* && \
       ./configure --with-pam --prefix=/usr && \
