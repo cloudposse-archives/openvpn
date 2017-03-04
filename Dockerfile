@@ -40,13 +40,13 @@ RUN apk add --virtual .build-deps build-base automake autoconf libtool git linux
     cd /usr/src && \
     ( wget -O duo_unix-latest.zip https://github.com/goruha/duo_unix/archive/master.zip && \
       unzip duo_unix-latest.zip && \
+      rm -f  duo_unix-latest.zip && \
       cd duo_unix-* && \
       ./configure --with-pam --prefix=/usr && \
       make && \
       make install && \
       cd .. && \
       rm -rf duo_unix-* && \
-      rm -f duo_unix-latest.zip \
     ) && \
     rm -rf /usr/src && \
     apk del .build-deps && \
