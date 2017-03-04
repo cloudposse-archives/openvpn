@@ -35,18 +35,18 @@ RUN set -ex \
 ENTRYPOINT ["/init"]
 
 
-RUN apk add --virtual .build-deps build-base automake autoconf libtool git linux-pam-dev openssl-dev wget && \
+RUN apk add --virtual .build-deps build-base automake autoconf libtool git linux-pam-dev openssl-dev wget unzip && \
     mkdir -p /usr/src && \
     cd /usr/src && \
-    ( wget https://dl.duosecurity.com/duo_unix-latest.tar.gz && \
-      tar zxf duo_unix-latest.tar.gz && \
+    ( wget -0 duo_unix-latest.zip https://github.com/goruha/duo_unix/archive/master.zip && \
+      unzip duo_unix-latest.zip && \
       cd duo_unix-* && \
       ./configure --with-pam --prefix=/usr && \
       make && \
       make install && \
       cd .. && \
       rm -rf duo_unix-* && \
-      rm -f duo_unix-latest.tar.gz \
+      rm -f duo_unix-latest.zip \
     ) && \
     rm -rf /usr/src && \
     apk del .build-deps && \
