@@ -17,6 +17,8 @@ ENV DUO_PROMPTS=1
 
 ENV GITHUB_PAM_TEAM=
 
+ENV OVPN_RENEG_SEC=0
+
 ADD https://storage.googleapis.com/kubernetes-release/release/$K8S_VERSION/bin/linux/amd64/kubectl /usr/local/bin/kubectl
 RUN chmod +x /usr/local/bin/kubectl
 
