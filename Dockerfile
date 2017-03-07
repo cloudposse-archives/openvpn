@@ -5,6 +5,8 @@ ARG K8S_VERSION=v1.5.1
 ARG GITHUB_TOKEN
 ARG PAM_SCRIPT_VERSION=1.1.8-1
 ARG S6_OVERLAY_VER=1.17.2.0
+ARG GITHUB_PAM_VERSION=0.10
+ARG OPENVPN_API_VERSION=0.2
 
 ENV MFA_PROVIDER=
 
@@ -101,7 +103,7 @@ RUN if [ ! -z $GITHUB_TOKEN ]; then \
           git \
       && make  \
       && REPO=cloudposse/github-pam \
-          VERSION=0.10 \
+          VERSION=$GITHUB_PAM_VERSION \
           FILE=github-pam_linux_386 \
           OUTPUT=github-pam-plugin \
           make github:download-release  \
@@ -124,7 +126,7 @@ RUN if [ ! -z $GITHUB_TOKEN ]; then \
           make \
       && make \
       && REPO=cloudposse/openvpn-api \
-          VERSION=0.1 \
+          VERSION=$OPENVPN_API_VERSION \
           FILE=openvpn-api_linux_386 \
           OUTPUT=openvpn-api \
           make github:download-release \
