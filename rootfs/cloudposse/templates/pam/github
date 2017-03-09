@@ -1,2 +1,0 @@
-auth        required    /lib/security/pam_script.so  $GITHUB_PAM_TEAM dir=/lib/security/github
-account     sufficient  pam_permit.so
