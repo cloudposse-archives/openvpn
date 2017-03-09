@@ -1,0 +1,24 @@
+#!/usr/bin/with-contenv bash
+
+if [ "${MFA_PROVIDER}" == "duo" ]; then
+  echo "- Enabling DUO MFA"
+  if [ -z "${DUO_IKEY}" ]; then
+    echo "DUO_IKEY not defined"
+    exit 1;
+  fi
+
+  if [ -z "${DUO_SKEY}" ]; then
+    echo "DUO_SKEY not defined"
+    exit 1;
+  fi
+
+  if [ -z "${DUO_HOST}" ]; then
+    echo "DUO_HOST not defined"
+    exit 1;
+  fi
+
+  /usr/bin/envsubst < "/cloudposse/templates/pam/duo" > "/etc/pam.d/openvpn"
+  /usr/bin/envsubst < "/cloudposse/templates/pam/pam_duo.conf.env" > "/etc/pam_duo.conf"
+  chmod 644 /etc/pam.d/openvpn
+  chmod 600 /etc/pam_duo.conf
+fi

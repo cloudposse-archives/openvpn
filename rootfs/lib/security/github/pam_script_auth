@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-github-pam-plugin "$1"
-exit $?
