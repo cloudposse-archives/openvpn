@@ -11,7 +11,7 @@ install:
     --password="$DOCKER_HUB_PASSWORD"
 
 script:
-- docker build --build-arg GITHUB_TOKEN=$GITHUB_TOKEN -t $DOCKER_IMAGE_NAME .
+- docker build -t $DOCKER_IMAGE_NAME .
 
 after_success:
 - |-
