@@ -26,12 +26,12 @@ for name in issued/*.crt; do
     name=${name%.crt}
     name=${name#issued/}
     if [ "$name" != "$OVPN_CN" ]; then
-      if openssl verify --CAfile ca.crt $path &> /dev/null; then
+      if openssl verify -CAfile ca.crt $path &> /dev/null; then
 	      status="VALID"
        else
 	      status="EXPIRED"
       fi
-      if [[ $status == "VALID" ] &&  [ -e crl.pem ]]; then
+      if [[ $status == "VALID" &&  -e crl.pem ]]; then
         if openssl verify -crl_check -CAfile cacheck.pem $path &> /dev/null; then
 	        status="VALID"
         else
